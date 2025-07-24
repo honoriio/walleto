@@ -2,7 +2,7 @@ from src.models.gastos import Gasto
 
 
 def main():
-    valor, categoria, descricao, data = Gasto.cadastrar_gasto()
+    valor, categoria, descricao, data = Gasto.entradas()
     novo_gasto = Gasto(valor, categoria, descricao, data)
 
     print(novo_gasto.valor)
