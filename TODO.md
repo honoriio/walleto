@@ -20,3 +20,9 @@
 
 - [ ] Documentação
     - [ ] Preciso criar a documentação do projeto, ainda não fiz isso.
+
+
+
+## Observação 
+    - Eu acredito que, seja melhor eu ja tirar a parte de CLI e ja deixar pronto para receber uma interface grafica. 
+    - No caso, eu ja vou deixar o programa retornar erros, sem o print.
