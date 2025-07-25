@@ -7,9 +7,23 @@
     - [x] Caso o usuário não informar nada em descrição, será adicionado um texto genérico padrão
     - [x] Caso o usuário não informar data, será adicionada a data atual
 
-- [ ] Implementação de banco de dados
-    - [ ] Será criada toda a lógica para o armazenamento dos dados dos gastos informados pelo usuário.
-    - [ ] Ainda não sei qual tecnologia usar, mas tenho em mente sqlite3.
+- [x] Implementação de banco de dados
+    - [x] Será criada toda a lógica para o armazenamento dos dados dos gastos informados pelo usuário.
+    - [x] Ainda não sei qual tecnologia usar, mas tenho em mente sqlite3.
+    - [ ] Fazer a implementação de With no codigo, o mesmo deixa o codigo mais seguro.
+    - [ ] Criar e implementar a função de editar gastos já criados.
+    - [ ] Analisar se vale a pena mudar a forma da exibição dos gastos, para, Nome do gasto, valor, categoria e descrição.  
+
+# Preparação para a Parte Visual
+
+- [ ] Fazer a preparação de todo o código para receber a parte visual.
+
+    - # O QUE SERÁ FEITO?
+
+        - [ ] Retirar todo e qualquer `print()` que exista no código. alterar por `Return`
+
+        - [ ] Mudar a lógica para uma lógica segmentada em rotas.
+ 
 
 - [ ] Implementação da parte visual
     - [ ] A ideia primária é criar uma interface de linha de comando.
