@@ -13,6 +13,7 @@
     - [ ] Fazer a implementação de With no codigo, o mesmo deixa o codigo mais seguro. // REFATORAR O CODIGO NA PARTE DO BANCO DE DADOS. 
     - [ ] Criar e implementar a função de editar gastos já criados.
     - [ ] Analisar se vale a pena mudar a forma da exibição dos gastos, para, Nome do gasto, valor, categoria e descrição.  
+    - [ ] Trocar o float por DECIMAL (Biblicoteca do python para tratar dinheiro), Vi que seria melhor que usar o floar pela sua precição..
 
 # Preparação para a Parte Visual
 
