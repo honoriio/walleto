@@ -10,7 +10,7 @@
 - [x] Implementação de banco de dados
     - [x] Será criada toda a lógica para o armazenamento dos dados dos gastos informados pelo usuário.
     - [x] Ainda não sei qual tecnologia usar, mas tenho em mente sqlite3.
-    - [ ] Fazer a implementação de With no codigo, o mesmo deixa o codigo mais seguro.
+    - [ ] Fazer a implementação de With no codigo, o mesmo deixa o codigo mais seguro. // REFATORAR O CODIGO NA PARTE DO BANCO DE DADOS. 
     - [ ] Criar e implementar a função de editar gastos já criados.
     - [ ] Analisar se vale a pena mudar a forma da exibição dos gastos, para, Nome do gasto, valor, categoria e descrição.  
 

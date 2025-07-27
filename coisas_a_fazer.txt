@@ -1,0 +1,50 @@
+Criação da função de editar gastos
+
+        Editar somente o que o usuário quiser (mais profissional)
+        Como funciona: o usuário escolhe qual campo quer editar (ex: só a descrição ou só o valor), e o sistema atualiza apenas isso no banco de dados.
+
+        Vantagem:
+
+        Mais eficiente
+
+        Evita sobrescrever dados corretos
+
+        Mais flexível
+
+        Desvantagem:
+
+        Você precisa implementar lógica para tratar campos individuais (ex: se for editar valor, editar só a coluna valor).
+
+
+Refatoração do codigo do banco de dados, devemos acrescentar o Whit
+
+        Fecha a conexão automaticamente
+        Você não precisa se lembrar de usar conn.close() — o with fecha pra você, mesmo que ocorra um erro no meio do caminho.
+
+        # Sem with
+        conn = sqlite3.connect('db.sqlite')
+        cursor = conn.cursor()
+        # Se esquecer do conn.close(), o banco pode ficar travado!
+
+        # Com with
+        with sqlite3.connect('db.sqlite') as conn:
+            cursor = conn.cursor()
+        # Aqui, o banco fecha automaticamente no final do bloco     
+
+
+
+        Evita vazamentos de recursos
+        Se você abrir muitos arquivos ou conexões sem fechar, vai ocupar memória e até corromper o banco.
+
+        with evita esse tipo de erro, especialmente em programas que rodam por muito tempo ou lidam com muitos dados.
+
+        3. Deixa o código mais limpo e legível
+        Você não precisa se preocupar com .close() ou try/finally — o Python gerencia isso por você. Isso reduz código desnecessário.
+
+        4. É o padrão profissional
+        Se você quiser seguir boas práticas como um programador de verdade (e você quer!), usar with mostra maturidade e cuidado com o código.
+
+
+Mudar a exebição de dados para 
+
+        mudar a forma da exibição dos gastos, para, Nome do gasto, valor, categoria e descrição.
