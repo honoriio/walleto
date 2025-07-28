@@ -26,12 +26,14 @@ class Gasto:
         global id_atual
 
         while True:
-            nome = input("Informe o Nome: ")
-            nome = validar_nome(nome)
-            if nome is not None:
+            entrada = input("Informe o Nome: ")
+            valido, resultado = validar_nome(entrada)
+
+            if valido:
+                nome = resultado  # nome está validado
                 break
             else:
-                print("Por favor insira um nome valido.")
+                print(f"Erro: {resultado}")
 
 
         while True:

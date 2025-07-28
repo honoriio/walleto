@@ -1,5 +1,6 @@
 # Local destinado as importações   
 import datetime
+import re
 
 
 def validar_entrada(valor):
@@ -22,4 +23,17 @@ def validar_data(data):
 
 def validar_nome(nome):
     nome = nome.strip()
-    return nome
+    
+    if not nome:
+        return False, "O nome do gasto não pode estar em branco"
+    
+    if len(nome) < 3:
+        return False, "O nome do gasto deve conter pelo menos 3 caracteres"
+    
+    if len(nome) > 20:
+        return False, "O nome do gasto não pode ter mais de 20 caracteres"
+    
+    if not re.search(r"[a-zA-Z0-9]", nome):
+        return False, "O nome do gasto deve conter pelo menos uma letra ou número."
+
+    return True, nome
