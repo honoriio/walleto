@@ -1,16 +1,23 @@
 # Local destinado as importações   
 import datetime
 import re
+from decimal import Decimal, InvalidOperation
 
 
 def validar_entrada(valor):
-    # Tenta converter o valor informado em float.
-    # Retorna o número em ponto flutuante se for válido, senão retorna None.
+    valor = valor.strip().replace(',', '.')
+    if not valor:
+        return False, "O valor não pode estar em branco"
+    
     try:
-        return float(valor)
-    except ValueError:
-        return None
-
+        valor = Decimal(valor)
+    except InvalidOperation:
+        return False, "Valor inválido, informe apenas números"
+    
+    if valor <= 0:
+        return False, "O valor deve ser maior que zero"
+    
+    return True, valor
 
 
 def validar_data(data):

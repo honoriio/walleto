@@ -1,5 +1,6 @@
 # Area destinada as importações
 from src.database.connection import get_connection
+from decimal import Decimal
 
 
 def criar_tabela(): # Cria a tabela gastos para armazenar os dados.
@@ -10,11 +11,11 @@ def criar_tabela(): # Cria a tabela gastos para armazenar os dados.
             CREATE TABLE IF NOT EXISTS gastos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT,
-                valor REAL NOT NULL,
+                valor NUMERIC NOT NULL,
                 categoria TEXT,
                 descricao TEXT,
                 data TEXT
-        )
+            )
         """)
 
         conn.commit()
@@ -27,7 +28,7 @@ def inserir_gasto(gasto): # insere os valores informados pelo usuario a tabela g
 
         cursor.execute(
             "INSERT INTO gastos (nome, valor, categoria, descricao, data) VALUES (?, ?, ?, ?, ?)", 
-            (gasto.nome, gasto.valor, gasto.categoria, gasto.descricao, gasto.data)
+            (gasto.nome, float(gasto.valor), gasto.categoria, gasto.descricao, gasto.data)
         )
 
         conn.commit()
@@ -70,6 +71,10 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
 
 
         for id, nome, valor, categoria, descricao, data in resultados:
+
+            valor = Decimal(valor) # Causa erro
+            valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
             print(f"ID: {id} Nome: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
         return resultados

@@ -37,12 +37,15 @@ class Gasto:
 
 
         while True:
-            valor = input("valor R$: ")
-            valor = validar_entrada(valor)
-            if valor is not None:
+            entrada = input("valor R$: ")
+            valido, valor_convertido = validar_entrada(entrada)
+
+            if valido:
+                valor = valor_convertido  # Só o valor decimal aqui
                 break
             else:
                 print('O valor informado está incorreto, por favor, insira o valor novamente.')
+
 
         # Solicita a categoria. Se o usuário não digitar nada, define como padrão.
         categoria = input("Categoria: ").strip()
