@@ -1,12 +1,13 @@
 # Local destinado para importações 
-from src.models.utils.validacao import validar_entrada, validar_data
+from src.models.utils.validacao import validar_entrada, validar_data, validar_nome
 import datetime
 
 
 class Gasto:
     #Representa um gasto individual com valor, categoria, descrição e data.
     #Fornece método estático para entrada e validação de dados via terminal.
-    def __init__(self, valor, categoria, descricao, data):
+    def __init__(self, nome, valor, categoria, descricao, data):
+        self.nome = nome
         self.valor = valor
         self.categoria = categoria
         self.descricao = descricao
@@ -16,12 +17,22 @@ class Gasto:
     @staticmethod
     def entradas(): 
     # Coleta e valida os seguintes dados do usuário:
+    # - Nome do gasto
     # - Valor do gasto
     # - Categoria do gasto
     # - Descrição do gasto
     # - Data do gasto
     
         global id_atual
+
+        while True:
+            nome = input("Informe o Nome: ")
+            nome = validar_nome(nome)
+            if nome is not None:
+                break
+            else:
+                print("Por favor insira um nome valido.")
+
 
         while True:
             valor = input("valor R$: ")
@@ -58,4 +69,4 @@ class Gasto:
                 print('A data inserida esta incorreta.')
 
 
-        return valor, categoria, descricao, data
+        return nome, valor, categoria, descricao, data

@@ -9,6 +9,7 @@ def criar_tabela(): # Cria a tabela gastos para armazenar os dados.
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS gastos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT,
                 valor REAL NOT NULL,
                 categoria TEXT,
                 descricao TEXT,
@@ -25,8 +26,8 @@ def inserir_gasto(gasto): # insere os valores informados pelo usuario a tabela g
         cursor = conn.cursor()
 
         cursor.execute(
-            "INSERT INTO gastos (valor, categoria, descricao, data) VALUES (?, ?, ?, ?)", 
-            (gasto.valor, gasto.categoria, gasto.descricao, gasto.data)
+            "INSERT INTO gastos (nome, valor, categoria, descricao, data) VALUES (?, ?, ?, ?, ?)", 
+            (gasto.nome, gasto.valor, gasto.categoria, gasto.descricao, gasto.data)
         )
 
         conn.commit()
@@ -68,7 +69,7 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
         resultados = cursor.fetchall()
 
 
-        for id, valor, categoria, descricao, data in resultados:
-            print(f"ID: {id} Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+        for id, nome, valor, categoria, descricao, data in resultados:
+            print(f"ID: {id} Nome: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
         return resultados

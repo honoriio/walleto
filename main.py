@@ -4,8 +4,8 @@ from src.database.gasto_repository import inserir_gasto, criar_tabela, listar_ga
 
 def main():
     criar_tabela()
-    valor, categoria, descricao, data = Gasto.entradas()
-    novo_gasto = Gasto(valor, categoria, descricao, data)
+    nome, valor, categoria, descricao, data = Gasto.entradas()
+    novo_gasto = Gasto(nome, valor, categoria, descricao, data)
     inserir_gasto(novo_gasto)
     listar_gastos()
 

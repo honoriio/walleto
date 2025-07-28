@@ -20,3 +20,6 @@ def validar_data(data):
     except ValueError:
         return None
 
+def validar_nome(nome):
+    nome = nome.strip()
+    return nome
