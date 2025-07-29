@@ -11,7 +11,11 @@
     - [x] Será criada toda a lógica para o armazenamento dos dados dos gastos informados pelo usuário.
     - [x] Ainda não sei qual tecnologia usar, mas tenho em mente sqlite3.
     - [x] Fazer a implementação de With no codigo, o mesmo deixa o codigo mais seguro. // REFATORAR O CODIGO NA PARTE DO BANCO DE DADOS. 
-    - [ ] Criar e implementar a função de editar gastos já criados.
+    - [x] Criar e implementar a função de editar gastos já criados.
+
+            - [ ] Analisar e corrigir os bugs da função, como foi criado uma função de coletar dados para edição, preciso criar o tratamento de erros e tratar os dados 
+                    para que os mesmos ja cheguem tratados a função de editar os gastos, com o intuito de não gerar mais erro.
+
     - [ ] criar a função de calculo (dar ao usuario a possibilidade de filtrar os gastos por dia, semana, e mês, gerando um relatorio de gastos para para o usuario.)
             Criar a função de filtrar gastos por dia, semana e mes, e tambem uma função que faça o calculo do gasto do periodo escolhido e por mês, e que faça a comparação de gasto dos meses anteriores.
     - [x] Analisar se vale a pena mudar a forma da exibição dos gastos, para, Nome do gasto, valor, categoria e descrição.  

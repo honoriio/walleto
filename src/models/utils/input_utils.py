@@ -2,6 +2,7 @@
 
 
 # Preciso criar um tratamento para a coleta de dados para a edição dos gastos. 
+# analisar o que  precisa ser feito.
 def coletar_dados_edicao(): # Função criada para editar os gastos.
     id = input("Informe o id da edição: ")
 
