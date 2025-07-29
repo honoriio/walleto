@@ -26,7 +26,7 @@ class Gasto:
         global id_atual
 
         while True:
-            entrada = input("Informe o Nome: ")
+            entrada = input("Informe o Nome do gasto: ")
             valido, resultado = validar_nome(entrada)
 
             if valido:

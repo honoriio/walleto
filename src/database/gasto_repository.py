@@ -52,13 +52,22 @@ def excluir_gastos(id): # exclui o gasto com base no ID informado pelo usuario
 
 
 
-def editar_gastos(): # Edita o gasto criado pelo usuario
+def editar_gastos(**dados): # faz o UPDATE dos gastos do usuario
     with get_connection() as conn:
-
         cursor = conn.cursor()
-        pass
 
-
+        cursor.execute("""
+        UPDATE gastos
+        SET nome = ?, valor = ?, categoria = ?, descricao = ?, data = ?
+        WHERE id = ?
+    """, (
+        dados["nome"],
+        dados["valor"],
+        dados["categoria"],
+        dados["descricao"],
+        dados["data"],
+        dados["id"],
+        ))
 
 
 
@@ -75,6 +84,11 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
             valor = Decimal(valor) # Causa erro
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
-            print(f"ID: {id} Nome: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
         return resultados
+    
+
+
+    def filtrar_gastos():
+        pass
