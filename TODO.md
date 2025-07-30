@@ -13,7 +13,7 @@
     - [x] Fazer a implementação de With no codigo, o mesmo deixa o codigo mais seguro. // REFATORAR O CODIGO NA PARTE DO BANCO DE DADOS. 
     - [x] Criar e implementar a função de editar gastos já criados.
 
-            - [ ] Analisar e corrigir os bugs da função, como foi criado uma função de coletar dados para edição, preciso criar o tratamento de erros e tratar os dados 
+            - [x] Analisar e corrigir os bugs da função, como foi criado uma função de coletar dados para edição, preciso criar o tratamento de erros e tratar os dados 
                     para que os mesmos ja cheguem tratados a função de editar os gastos, com o intuito de não gerar mais erro.
 
     - [ ] criar a função de calculo (dar ao usuario a possibilidade de filtrar os gastos por dia, semana, e mês, gerando um relatorio de gastos para para o usuario.)
