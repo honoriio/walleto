@@ -10,7 +10,7 @@ def main():
     inserir_gasto(novo_gasto)
     listar_gastos()
     dados = coletar_dados_edicao()
-    editar_gastos(**dados)
+    editar_gastos(dados)
 
 
 if __name__ == "__main__":

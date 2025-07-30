@@ -13,7 +13,7 @@ def coletar_dados_edicao(): # Função criada para editar os gastos.
     data = input("Informe a Data: ")
 
 
-    valor = float(valor)
+
 
     return {
         "id": id,
@@ -23,3 +23,5 @@ def coletar_dados_edicao(): # Função criada para editar os gastos.
         "descricao": descricao if descricao else None,
         "data": data if data else None
     }
+
+

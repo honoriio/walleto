@@ -51,23 +51,37 @@ def excluir_gastos(id): # exclui o gasto com base no ID informado pelo usuario
             print(f"Gasto com ID {id} foi excluído com sucesso.")
 
 
-
-def editar_gastos(**dados): # faz o UPDATE dos gastos do usuario
+# Preciso entender o que foi feito aqui 
+def editar_gastos(dados):
     with get_connection() as conn:
         cursor = conn.cursor()
 
+        # Buscar dados antigos
+        cursor.execute("SELECT nome, valor, categoria, descricao, data FROM gastos WHERE id = ?", (dados["id"],))
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            print("Gasto não encontrado.")
+            return
+
+        nome_antigo, valor_antigo, categoria_antiga, descricao_antiga, data_antiga = resultado
+
+        # Substituir somente se o novo valor foi informado
+        nome = dados["nome"] if dados["nome"] else nome_antigo
+        valor = float(dados["valor"]) if dados["valor"] else valor_antigo
+        categoria = dados["categoria"] if dados["categoria"] else categoria_antiga
+        descricao = dados["descricao"] if dados["descricao"] else descricao_antiga
+        data = dados["data"] if dados["data"] else data_antiga
+
+        # Agora faz o UPDATE com segurança
         cursor.execute("""
-        UPDATE gastos
-        SET nome = ?, valor = ?, categoria = ?, descricao = ?, data = ?
-        WHERE id = ?
-    """, (
-        dados["nome"],
-        dados["valor"],
-        dados["categoria"],
-        dados["descricao"],
-        dados["data"],
-        dados["id"],
-        ))
+            UPDATE gastos
+            SET nome = ?, valor = ?, categoria = ?, descricao = ?, data = ?
+            WHERE id = ?
+        """, (nome, valor, categoria, descricao, data, dados["id"]))
+
+        conn.commit()
+
 
 
 
