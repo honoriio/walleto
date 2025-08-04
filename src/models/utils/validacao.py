@@ -24,7 +24,8 @@ def validar_data(data):
     # Tenta converter a string no formato 'dd/mm/aaaa' para um objeto date.
     # Retorna a data convertida se for válida, senão retorna None.
     try:
-        return datetime.datetime.strptime(data, "%d/%m/%Y").date()
+        data = datetime.datetime.strptime(data, "%d/%m/%Y").date()
+        return data.strftime("%d/%m/%Y")
     except ValueError:
         return None
 

@@ -104,5 +104,21 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
     
 
 
-    def filtrar_gastos():
-        pass
+def filtrar_gastos():
+    with get_connection() as conn:
+        cursor  = conn.cursor()
+
+        cursor.execute("SELECT * FROM gastos WHERE data BETWEEN ? AND ?", ('20-07-2025', '30-07-2025'))
+        resultados = cursor.fetchall()
+
+        for id, nome, valor, categoria, descricao, data in resultados:
+
+            valor = Decimal(valor) # Causa erro
+            valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+
+        return resultados
+
+
+
