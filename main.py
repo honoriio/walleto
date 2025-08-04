@@ -4,7 +4,13 @@ from src.database.gasto_repository import inserir_gasto, criar_tabela, listar_ga
 
 
 def main():
-
+    criar_tabela()
+    nome, valor, categoria, descricao, data = Gasto.entradas()
+    novo_gasto = Gasto(nome, valor, categoria, descricao, data)
+    inserir_gasto(novo_gasto)
+    listar_gastos()
+    dados = coletar_dados_edicao()
+    editar_gastos(dados)
     decisao = input('Filtrar Gastos? ').upper()
     if decisao == "SIM":
         inicio = input('inicio: ')
