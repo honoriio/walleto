@@ -84,7 +84,30 @@ Você pode acompanhar o progresso nos seguintes arquivos:
 - [ ] Interface gráfica com Tkinter ou PyQt  
 - [ ] Exportação de dados para CSV  
 - [ ] Dashboard com gráficos  
-- [ ] Tela de login e múltiplos usuários
+- [ ] Tela de login e múltiplos usuários  
+
+---
+
+### 🔧 Refatoração da função de filtragem
+
+- [ ] Unificar a lógica de filtros em uma única função `filtrar_gastos()`, robusta e flexível.
+- [ ] Permitir múltiplos filtros combinados:
+  - Categoria
+  - Local
+  - Data (início e fim)
+  - Valor (mínimo e máximo)
+  - Descrição ou palavra-chave
+- [x] **Decisão tomada:** manter uma única função de filtro "parruda", que aplica apenas os critérios informados.
+
+---
+
+### 📊 Função de soma e média de gastos
+
+- [ ] Criar uma função para calcular a **soma total** e a **média de gastos**.
+- [ ] A função usará os dados retornados pela `filtrar_gastos()`.
+- [ ] Implementar cálculo de média mensal fixa.
+- [ ] Permitir cálculo de totais por categoria ou período (baseado nos filtros aplicados).
+
 
 ---
 
