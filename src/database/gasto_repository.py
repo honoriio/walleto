@@ -103,7 +103,7 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
         return resultados
     
 
-
+# Refatorar a função  PAUSA PARA ESTUDO, AINDA NÃO APRENDI O SUFICIENTE DE SQL PARA PROCEGUIR
 def filtrar_gastos(inicio, fim):
     with get_connection() as conn:
         cursor  = conn.cursor()
@@ -122,3 +122,43 @@ def filtrar_gastos(inicio, fim):
 
 
 
+# FUNÇÃO DE TESTE CRIADA!!!!! NÃO SERA USADA NO CODIGO
+def filtrar(data_inicio=None, data_final=None, categoria_busca=None, valor_inicial=None, valor_final=None):
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        
+        # Filtra gastos pela data
+        cursor.execute("SELECT * FROM gastos WHERE data BETWEEN ? AND ?", (data_inicio, data_final))
+        resultados_data = cursor.fetchall()
+
+        for id, nome, valor, categoria, descricao, data in resultados_data:
+
+            valor = Decimal(valor)
+            valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+
+        # Filtra gastos pela categoria 
+        cursor.execute("SELECT * FROM gastos WHERE categoria BETWEEN ?", (categoria_busca))
+        resultados_categoria = cursor.fetchall
+
+        for id, nome, valor, categoria, descricao, data in resultados_categoria:
+
+            valor = Decimal(valor)
+            valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+
+
+        # filtra gastos pelo valor do gasto
+        cursor.execute("SELECT * FROM gastos WHERE valor BETWEEN ? AND ?", (valor_inicial, valor_final))
+        resultados_valor = cursor.fetchall()
+
+        for id, nome, valor, categoria, descricao, data in resultados_valor:
+
+            valor = Decimal(valor)
+            valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+
+        return resultados_data, resultados_categoria, resultados_valor
