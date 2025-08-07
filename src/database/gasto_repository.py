@@ -104,11 +104,11 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
     
 
 # Refatorar a função  PAUSA PARA ESTUDO, AINDA NÃO APRENDI O SUFICIENTE DE SQL PARA PROCEGUIR
-def filtrar_gastos(inicio, fim):
+def filtrar_gastos_data(data_inicio, data_final):
     with get_connection() as conn:
         cursor  = conn.cursor()
 
-        cursor.execute("SELECT * FROM gastos WHERE data BETWEEN ? AND ?", (inicio, fim))
+        cursor.execute("SELECT * FROM gastos WHERE data BETWEEN ? AND ?", (data_inicio, data_final))
         resultados = cursor.fetchall()
 
         for id, nome, valor, categoria, descricao, data in resultados:
@@ -116,49 +116,58 @@ def filtrar_gastos(inicio, fim):
             valor = Decimal(valor)
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
+            # Retirar isso depois e manter somente o return
             print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
         return resultados
 
 
-
-# FUNÇÃO DE TESTE CRIADA!!!!! NÃO SERA USADA NO CODIGO
-def filtrar(data_inicio=None, data_final=None, categoria_busca=None, valor_inicial=None, valor_final=None):
+def filtrar_gasto_valor(valor_min, valor_max):
     with get_connection() as conn:
         cursor = conn.cursor()
-        
-        # Filtra gastos pela data
-        cursor.execute("SELECT * FROM gastos WHERE data BETWEEN ? AND ?", (data_inicio, data_final))
-        resultados_data = cursor.fetchall()
 
-        for id, nome, valor, categoria, descricao, data in resultados_data:
+        cursor.execute("SELECT * FROM gastos WHERE valor BETWEEN ? AND ?", (valor_min, valor_max))
+        resultados = cursor.fetchall()
 
+        for id, nome, valor, categoria, descricao, data in resultados:
             valor = Decimal(valor)
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
+            # Retirar isso depois e manter somente o return
             print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
-        # Filtra gastos pela categoria 
-        cursor.execute("SELECT * FROM gastos WHERE categoria BETWEEN ?", (categoria_busca))
-        resultados_categoria = cursor.fetchall
+        return resultados
 
-        for id, nome, valor, categoria, descricao, data in resultados_categoria:
 
+def filtrar_gastos_categoria(categoria):
+    with get_connection() as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM gastos WHERE categoria = ?", (categoria,))
+        resultados = cursor.fetchall()
+
+        for id, nome, valor, categoria, descricao, data in resultados:
             valor = Decimal(valor)
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
+            # Retirar isso depois e manter somente o return
             print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
+        return resultados
 
-        # filtra gastos pelo valor do gasto
-        cursor.execute("SELECT * FROM gastos WHERE valor BETWEEN ? AND ?", (valor_inicial, valor_final))
-        resultados_valor = cursor.fetchall()
 
-        for id, nome, valor, categoria, descricao, data in resultados_valor:
+def filtrar_gastos_nome(nome):
+    with get_connection() as conn:
+        cursor = conn.cursor()
 
+        cursor.execute("SELECT * FROM gastos WHERE nome = ?", (nome,))
+        resultados = cursor.fetchall()
+
+        for id, nome, valor, categoria, descricao, data in resultados:
             valor = Decimal(valor)
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
+            # Retirar isso depois e manter somente o return
             print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
-        return resultados_data, resultados_categoria, resultados_valor
+        return resultados
