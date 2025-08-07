@@ -104,6 +104,7 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
     
 
 # Refatorar a função  PAUSA PARA ESTUDO, AINDA NÃO APRENDI O SUFICIENTE DE SQL PARA PROCEGUIR
+# Adicionar filtragem por usuario para tornar essa aplicação multiusuario....
 def filtrar_gastos_data(data_inicio, data_final):
     with get_connection() as conn:
         cursor  = conn.cursor()
@@ -121,7 +122,7 @@ def filtrar_gastos_data(data_inicio, data_final):
 
         return resultados
 
-
+# Adicionar filtragem por usuario para tornar essa aplicação multiusuario....
 def filtrar_gasto_valor(valor_min, valor_max):
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -138,7 +139,7 @@ def filtrar_gasto_valor(valor_min, valor_max):
 
         return resultados
 
-
+# Adicionar filtragem por usuario para tornar essa aplicação multiusuario....
 def filtrar_gastos_categoria(categoria):
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -155,7 +156,7 @@ def filtrar_gastos_categoria(categoria):
 
         return resultados
 
-
+# Adicionar filtragem por usuario para tornar essa aplicação multiusuario....
 def filtrar_gastos_nome(nome):
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -171,3 +172,7 @@ def filtrar_gastos_nome(nome):
             print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
 
         return resultados
+
+# Adicionar filtragem por usuario para tornar essa aplicação multiusuario....
+def calcular_gastos():
+    pass
