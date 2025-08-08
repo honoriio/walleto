@@ -173,6 +173,7 @@ def filtrar_gastos_nome(nome):
 
         return resultados
 
-# Adicionar filtragem por usuario para tornar essa aplicação multiusuario....
-def calcular_gastos():
-    pass
+# Função criada para calcular o total gasto por filtro
+def calcular_gastos(valor):
+    total = sum(linha[2] for linha in valor)
+    return total
