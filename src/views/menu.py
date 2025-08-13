@@ -1,4 +1,4 @@
-from colors import Cores
+from src.views.colors import Cores
 from getpass import getpass
 
 PRETO, VERMELHO, VERDE, AMARELO, AZUL, MAGENTA, CIANO, BRANCO,PRETO_CLARO, VERMELHO_CLARO, VERDE_CLARO, AMARELO_CLARO, AZUL_CLARO, MAGENTA_CLARO, CIANO_CLARO, BRANCO_CLARO, RESET = Cores()
@@ -12,16 +12,28 @@ def cabecalho(): # --> cabeçalho principal do programa
 
 def menu_escolha(): # --> menu principal do programa, que levara o usuario onde ele desejar 
     print('=' * 60)
-    print('[1] - Ver gastos')
-    print('[2] - Adicionar gastos')
-    print('[3] - Editar Gasto')
-    print('[4] - Excluir Gasto')
+    print('[1] - Adicionar Gastos')
+    print('[2] - Ver Gastos')
+    print('[3] - Sair')
+    print('=' * 60)
+
+    opc = int(input('Escolha: '))
+
+    return opc
+
+
+def sub_menu_escolha():
+    print('=' * 60)
+    print('[1] - Editar Gastos')
+    print('[2] - Excluir Gasto')
+    print('[3] - Filtrar Gastos')
+    print('[4] - Voltar')
     print('[5] - Sair')
     print('=' * 60)
 
-    opc = input('Escolha: ')
+    sub_opc = int(input('Escolha: '))
 
-    return opc
+    return sub_opc
 
 
 def menu_login(): # --> menu criado para o login do usuario, em breve irei implementar o login 
@@ -33,6 +45,20 @@ def menu_login(): # --> menu criado para o login do usuario, em breve irei imple
 
 
     return usuario, senha
+
+
+def menu_filtro():
+    print('=' * 60)
+    print('[1] - Filtrar Por Periodo')
+    print('[2] - Filtrar Por Valor')
+    print('[3] - Filtrar Por Categoria')
+    print('[4] - Filtrar por Nome')
+    print('[5] - Sair')
+    print('=' * 60)
+
+    opc_filtro = int(input('Escoha: '))
+
+    return opc_filtro
 
 
 

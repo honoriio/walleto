@@ -71,7 +71,7 @@ def editar_gastos(dados):
         valor = float(dados["valor"]) if dados["valor"] else valor_antigo
         categoria = dados["categoria"] if dados["categoria"] else categoria_antiga
         descricao = dados["descricao"] if dados["descricao"] else descricao_antiga
-        data = dados["data"] if dados["data"] else data_antiga
+        data = dados["data"] if dados["data"] else data_antigaq
 
         # Agora faz o UPDATE com segurança
         cursor.execute("""
