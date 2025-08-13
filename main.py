@@ -41,8 +41,10 @@ def main():
                         excluir_gastos(gasto_id)
                         listar_gastos()
 
+                    # Leva ao submenu de filtros, onde o usuario usara para filtrar os gastos.
                     case 3: # --> submenu d e filtros
                         opc_filtro = menu_filtro()
+
                         match opc_filtro:
                             case 1: # --> filtra os gastos por data/periodo
                                 data_inicio = input('Inicio: ')
@@ -53,6 +55,24 @@ def main():
                                 valor_min = input('Valor Minimo: ')
                                 valor_max = input('Valo Maximo: ')
                                 filtrar_gasto_valor(valor_min, valor_max)
+
+                            case 3: # --> Filtra gastos pela sua categoria
+                                categoria = input('Informe a categoria: ')
+                                filtrar_gastos_categoria(categoria)
+
+                            case 4: # -->  Filtra os gastos pelo nome do gasto
+                                nome_gasto = input('Informe o nome do gasto: ')
+                                filtrar_gastos_nome(nome_gasto)
+
+                            case 5:# --> Encerra o programa
+                                limpar_tela()
+                                print('=' * 60) 
+                                print(f'{VERMELHO}PROGRAMA ENCERRADO...{RESET}'.center(60))
+                                print('=' * 60)
+                                time.sleep(2)
+                                limpar_tela()
+                                sys.exit()
+
                     case 4: # --> volta ao menu anterior.
                         pass
                     
