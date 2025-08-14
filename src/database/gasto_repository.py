@@ -98,7 +98,8 @@ def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
             valor = Decimal(valor) # Causa erro
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
-            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print(f"ID: {id} | Nome Do Gasto: {nome} | Valor: {valor} | Categoria: {categoria} | Descrição: {descricao} | Data: {data} ")
+            print('-' * 160)
 
         return resultados
     
