@@ -73,4 +73,10 @@ def cabecalho_inserir_gastos():
     print('=' * TM)
     print(f'{AZUL}CADASTRAR GASTOS{RESET}'.center(TM))
     print('=' * TM)
-    pass
+    
+
+
+def cabecalho_editar_gastos():
+    print('=' * TM)
+    print(f'{MAGENTA}EDITAR GASTOS{RESET}'.center(TM))
+    print('=' * TM)

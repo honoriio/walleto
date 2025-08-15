@@ -1,7 +1,9 @@
 # Area destinada as importações
 from src.database.connection import get_connection
 from decimal import Decimal
+from src.views.colors import Cores
 
+PRETO, VERMELHO, VERDE, AMARELO, AZUL, MAGENTA, CIANO, BRANCO, PRETO_CLARO, VERMELHO_CLARO, VERDE_CLARO, AMARELO_CLARO, AZUL_CLARO, MAGENTA_CLARO, CIANO_CLARO, BRANCO_CLARO, RESET = Cores()
 
 def criar_tabela(): # Cria a tabela gastos para armazenar os dados.
     with get_connection() as conn:
@@ -51,41 +53,52 @@ def excluir_gastos(id): # exclui o gasto com base no ID informado pelo usuario
             print(f"Gasto com ID {id} foi excluído com sucesso.")
 
 
-# Preciso entender o que foi feito aqui 
+# Função que edita os gastos com base no id fornecido para localziar o gastos, e apos isso usa os dados coletados para editar o gasto.
+# A função ja tem tratamento de erro e retorno de mensagens de erro.
 def editar_gastos(dados):
-    with get_connection() as conn:
-        cursor = conn.cursor()
+    try:
+        with get_connection() as conn:
+            cursor = conn.cursor()
 
-        # Buscar dados antigos
-        cursor.execute("SELECT nome, valor, categoria, descricao, data FROM gastos WHERE id = ?", (dados["id"],))
-        resultado = cursor.fetchone()
+            cursor.execute("SELECT nome, valor, categoria, descricao, data FROM gastos WHERE id = ?", (dados["id"],))
+            resultado = cursor.fetchone()
 
-        if not resultado:
-            print("Gasto não encontrado.")
-            return
+            if not resultado:
+                return {"status": "erro", "mensagem": "Gasto não encontrado."}
 
-        nome_antigo, valor_antigo, categoria_antiga, descricao_antiga, data_antiga = resultado
+            nome_antigo, valor_antigo, categoria_antiga, descricao_antiga, data_antiga = resultado
 
-        # Substituir somente se o novo valor foi informado
-        nome = dados["nome"] if dados["nome"] else nome_antigo
-        valor = float(dados["valor"]) if dados["valor"] else valor_antigo
-        categoria = dados["categoria"] if dados["categoria"] else categoria_antiga
-        descricao = dados["descricao"] if dados["descricao"] else descricao_antiga
-        data = dados["data"] if dados["data"] else data_antiga
+            nome = dados.get("nome", nome_antigo)
+            valor = float(dados["valor"]) if dados.get("valor") and str(dados["valor"]).replace(".", "").replace("-", "").isdigit() else valor_antigo
+            categoria = dados.get("categoria", categoria_antiga)
+            descricao = dados.get("descricao", descricao_antiga)
+            data = dados.get("data", data_antiga)
 
-        # Agora faz o UPDATE com segurança
-        cursor.execute("""
-            UPDATE gastos
-            SET nome = ?, valor = ?, categoria = ?, descricao = ?, data = ?
-            WHERE id = ?
-        """, (nome, valor, categoria, descricao, data, dados["id"]))
+            cursor.execute("""
+                UPDATE gastos
+                SET nome = ?, valor = ?, categoria = ?, descricao = ?, data = ?
+                WHERE id = ?
+            """, (nome, valor, categoria, descricao, data, dados["id"]))
 
-        conn.commit()
+            if cursor.rowcount > 0:
+                conn.commit()
+                return {"status": "sucesso", "mensagem": "Gasto editado com sucesso!"}
+            else:
+                return {"status": "erro", "mensagem": "Nenhuma alteração realizada."}
+
+    except KeyError as e:
+        return {"status": "erro", "mensagem": f"Chave {e} não encontrada nos dados fornecidos."}
+    except ValueError as e:
+        return {"status": "erro", "mensagem": "Valor inválido para o campo 'valor'. Use um número válido."}
+    except Exception as e:
+        return {"status": "erro", "mensagem": f"Erro ao editar gasto: {e}"}
+
 
 
 
 
 def listar_gastos(): # Lista os gastos que estão no banco de dados do usuario.
+    
     with get_connection() as conn:
         cursor = conn.cursor()
 
@@ -119,7 +132,8 @@ def filtrar_gastos_data(data_inicio, data_final):
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
             # Retirar isso depois e manter somente o return
-            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {VERDE}{data}{RESET} ")
+            print('-' * 160)
 
         return resultados
 
@@ -136,7 +150,8 @@ def filtrar_gasto_valor(valor_min, valor_max):
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
             # Retirar isso depois e manter somente o return
-            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${VERDE}{valor}{RESET}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print('-' * 160)
 
         return resultados
 
@@ -153,7 +168,8 @@ def filtrar_gastos_categoria(categoria):
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
             # Retirar isso depois e manter somente o return
-            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {VERDE}{categoria}{RESET}, Descrição: {descricao}, Data: {data} ")
+            print('-' * 160)
 
         return resultados
 
@@ -170,7 +186,8 @@ def filtrar_gastos_nome(nome):
             valor = f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
             # Retirar isso depois e manter somente o return
-            print(f"ID: {id} Nome Do Gasto: {nome}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print(f"ID: {id} Nome Do Gasto: {VERDE}{nome}{RESET}, Valor: R${valor}, Categoria: {categoria}, Descrição: {descricao}, Data: {data} ")
+            print('-' * 160)
 
         return resultados
 

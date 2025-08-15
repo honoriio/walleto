@@ -3,9 +3,9 @@ import sys
 import time
 from src.views.colors import Cores
 from src.models.utils.input_utils import coletar_dados_edicao
-from src.views.tela import limpar_tela
+from src.views.tela import limpar_tela, exibir_mensagem, encerrar_programa
 from src.database.gasto_repository import inserir_gasto, criar_tabela, listar_gastos, excluir_gastos, editar_gastos, filtrar_gastos_data, calcular_gastos, filtrar_gasto_valor, filtrar_gastos_categoria, filtrar_gastos_nome
-from src.views.menu import cabecalho, menu_escolha, menu_login, sub_menu_escolha, menu_filtro, cabecalho_gastos, cabecalho_inserir_gastos
+from src.views.menu import cabecalho, menu_escolha, menu_login, sub_menu_escolha, menu_filtro, cabecalho_gastos, cabecalho_inserir_gastos, cabecalho_editar_gastos
 PRETO, VERMELHO, VERDE, AMARELO, AZUL, MAGENTA, CIANO, BRANCO,PRETO_CLARO, VERMELHO_CLARO, VERDE_CLARO, AMARELO_CLARO, AZUL_CLARO,MAGENTA_CLARO, CIANO_CLARO, BRANCO_CLARO, RESET = Cores()
 
 TM = 160 # --> Variavel destinada a alterar o tamanho das linhas
@@ -26,20 +26,31 @@ def main():
                 inserir_gasto(novo_gasto)
                 limpar_tela()
 
-            case 2: # --> opção de ver os gastos inseridos.
+            case 2: # --> Opção de listar os gastos, essa opção chama a função que busca o historico de gasto do banco de dados.
                 limpar_tela()
                 cabecalho_gastos()
                 listar_gastos()
                 sub_opc = sub_menu_escolha()
 
                 match sub_opc:
-                    case 1: # --> opção de editar os dados
+                    case 1: # --> opção de filtrar os gastos, o mesmo recebe o ID do gasto, busca ele no banco de dados e edita com as informações coletadas do usuario.
+                        limpar_tela()
+                        cabecalho_editar_gastos()
                         dados = coletar_dados_edicao()
-                        editar_gastos(dados)
-                        print('=' * TM)
+                        resultado = editar_gastos(dados)
+
+                        print('-' * TM)
+                        if resultado["status"] == "sucesso":
+                            exibir_mensagem(resultado["mensagem"], VERDE)
+                        else:
+                            exibir_mensagem(resultado["mensagem"], VERMELHO)
+                        print('-' * TM)
+                        time.sleep(2)
+                        limpar_tela()
+                        cabecalho_gastos()
                         listar_gastos()
 
-                    case 2: # --> opção de excluir um gasto
+                    case 2: # --> opção de excluir um gasto com base no seu ID. (Preciso criar una confirmação visual para essa função)
                         gasto_id = int(input('Informe o ID do gasto: '))
                         excluir_gastos(gasto_id)
                         listar_gastos()
@@ -68,35 +79,17 @@ def main():
                                 filtrar_gastos_nome(nome_gasto)
 
                             case 5:# --> Encerra o programa
-                                limpar_tela()
-                                print('=' * TM) 
-                                print(f'{VERMELHO}PROGRAMA ENCERRADO...{RESET}'.center(TM))
-                                print('=' * TM)
-                                time.sleep(2)
-                                limpar_tela()
-                                sys.exit()
+                                encerrar_programa()
 
                     case 4: # --> volta ao menu anterior.
                         limpar_tela()
-                        pass
+                        
                     
                     case 5: # --> encerra o programa
-                        limpar_tela()
-                        print('=' * TM) 
-                        print(f'{VERMELHO}PROGRAMA ENCERRADO...{RESET}'.center(TM))
-                        print('=' * TM)
-                        time.sleep(2)
-                        limpar_tela()
-                        sys.exit()
+                        encerrar_programa()
             
             case 3: # --> Fecha o programa.
-                limpar_tela()
-                print('=' * TM) 
-                print(f'{VERMELHO}PROGRAMA ENCERRADO...{RESET}'.center(TM))
-                print('=' * TM)
-                time.sleep(2)
-                limpar_tela()
-                sys.exit()
+                encerrar_programa()
 
 
 if __name__ == "__main__":   
