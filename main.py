@@ -5,7 +5,7 @@ from src.views.colors import Cores
 from src.models.utils.input_utils import coletar_dados_edicao
 from src.views.tela import limpar_tela, exibir_mensagem, encerrar_programa
 from src.database.gasto_repository import inserir_gasto, criar_tabela, listar_gastos, excluir_gastos, editar_gastos, filtrar_gastos_data, calcular_gastos, filtrar_gasto_valor, filtrar_gastos_categoria, filtrar_gastos_nome
-from src.views.menu import cabecalho, menu_escolha, menu_login, sub_menu_escolha, menu_filtro, cabecalho_gastos, cabecalho_inserir_gastos, cabecalho_editar_gastos
+from src.views.menu import cabecalho, menu_escolha, menu_login, sub_menu_escolha, menu_filtro, cabecalho_gastos, cabecalho_inserir_gastos, cabecalho_editar_gastos, cabecalho_excluir_gasto, cabecalho_filtro
 PRETO, VERMELHO, VERDE, AMARELO, AZUL, MAGENTA, CIANO, BRANCO,PRETO_CLARO, VERMELHO_CLARO, VERDE_CLARO, AMARELO_CLARO, AZUL_CLARO,MAGENTA_CLARO, CIANO_CLARO, BRANCO_CLARO, RESET = Cores()
 
 TM = 160 # --> Variavel destinada a alterar o tamanho das linhas
@@ -26,7 +26,7 @@ def main():
                 inserir_gasto(novo_gasto)
                 limpar_tela()
 
-            case 2: # --> Opção de listar os gastos, essa opção chama a função que busca o historico de gasto do banco de dados.
+            case 2: # --> Opção de listar os gastos, essa opção chama a função que busca o historico de gasto do banco de dados. e tambem exibe o submenu dos gastos
                 limpar_tela()
                 cabecalho_gastos()
                 listar_gastos()
@@ -50,13 +50,19 @@ def main():
                         cabecalho_gastos()
                         listar_gastos()
 
+
                     case 2: # --> opção de excluir um gasto com base no seu ID. (Preciso criar una confirmação visual para essa função)
+                        limpar_tela()
+                        cabecalho_excluir_gasto()
                         gasto_id = int(input('Informe o ID do gasto: '))
                         excluir_gastos(gasto_id)
                         listar_gastos()
 
+
                     # Leva ao submenu de filtros, onde o usuario usara para filtrar os gastos.
-                    case 3: # --> submenu d e filtros
+                    case 3: # --> submenu de filtros
+                        limpar_tela()
+                        cabecalho_filtro()
                         opc_filtro = menu_filtro()
 
                         match opc_filtro:

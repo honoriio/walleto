@@ -80,3 +80,14 @@ def cabecalho_editar_gastos():
     print('=' * TM)
     print(f'{MAGENTA}EDITAR GASTOS{RESET}'.center(TM))
     print('=' * TM)
+
+def cabecalho_excluir_gasto():
+    print('=' * TM)
+    print(f'{VERMELHO}EXCLUIR GASTOS{RESET}'.center(TM))
+    print('=' * TM)
+
+
+def cabecalho_filtro():
+    print('=' * TM)
+    print(f'{AZUL}FILTRAR GASTOS{RESET}'.center(TM))
+    print('=' * TM)
